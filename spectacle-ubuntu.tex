@@ -1,0 +1,118 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{longtable}
+\usepackage{listings}
+
+\title{Spectacle-like Window Tiling Setup on Ubuntu 24.04 (X11)}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Overview}
+This guide sets up Spectacle-style window tiling on Ubuntu 24.04 using Tiling Assistant. It includes:
+\begin{itemize}
+    \item Installing the Extensions app
+    \item Installing Tiling Assistant
+    \item Disabling workspace-switching shortcuts
+    \item Configuring Spectacle-like tiling shortcuts
+    \item Disabling the window pop-up
+\end{itemize}
+
+\section{Install GNOME Extensions App}
+Open a terminal and run:
+\begin{lstlisting}[language=bash]
+sudo apt update
+sudo apt install gnome-extensions-app gnome-shell-extension-prefs
+\end{lstlisting}
+This installs the GUI app to manage GNOME extensions.
+
+\section{Install Tiling Assistant}
+\subsection*{Option A: Using Browser (Recommended)}
+\begin{enumerate}
+    \item Open Firefox or Chromium
+    \item Go to \url{https://extensions.gnome.org/extension/3733/tiling-assistant/}
+    \item Toggle the switch to ON and follow prompts to install.
+\end{enumerate}
+
+\subsection*{Option B: Using Terminal (if available in repo)}
+\begin{lstlisting}[language=bash]
+sudo apt install gnome-shell-extension-tiling-assistant
+\end{lstlisting}
+
+\section{Enable Tiling Assistant}
+\begin{enumerate}
+    \item Press \textbf{Super} (Windows key), type \textbf{Extensions}, and open the app.
+    \item Find \textbf{Tiling Assistant} in the list.
+    \item Flip the switch \textbf{ON} to enable it.
+    \item Click the \textbf{gear icon} to open preferences.
+\end{enumerate}
+
+\section{Disable Workspace-Switching Shortcuts}
+GNOME intercepts certain keys (Super + Shift + Arrow) for workspace management. Disable them:
+\begin{enumerate}
+    \item Open \textbf{Settings $\rightarrow$ Keyboard $\rightarrow$ Keyboard Shortcuts}.
+    \item Find the \textbf{Navigation / Workspaces} section.
+    \item Disable the following by clicking them and pressing Backspace:
+\begin{lstlisting}
+Move window to workspace left
+Move window to workspace right
+Move window to workspace up
+Move window to workspace down
+\end{lstlisting}
+\end{enumerate}
+
+\section{Configure Tiling Assistant Shortcuts}
+In Tiling Assistant preferences, set the following shortcuts:
+
+\begin{longtable}{|p{3cm}|p{5cm}|}
+\hline
+\textbf{Action} & \textbf{Shortcut} \\
+\hline
+Snap top-left & Super + Shift + Left \\
+Snap top-right & Super + Shift + Right \\
+Snap bottom-left & Super + Shift + Down \\
+Snap bottom-right & Super + Shift + Up \\
+Left half & Super + Left \\
+Right half & Super + Right \\
+Maximize window & Super + Up \\
+Restore window & Super + Down \\
+\hline
+\end{longtable}
+
+These shortcuts now work without conflicts.
+
+\section{Disable the Tiling Pop-up (Window Overview)}
+To prevent the “list of other applications” popup when tiling:
+\begin{enumerate}
+    \item Open \textbf{Extensions app $\rightarrow$ Tiling Assistant $\rightarrow$ Gear icon}.
+    \item Look for \textbf{Window preview / popup} settings and toggle OFF.
+\end{enumerate}
+
+Alternatively, disable globally via terminal:
+\begin{lstlisting}[language=bash]
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-preview false
+\end{lstlisting}
+
+\section*{Result}
+\begin{itemize}
+    \item Left/right tiling works (Super + Left/Right)
+    \item Corner snapping works (Super + Shift + Arrow)
+    \item Maximize and restore work (Super + Up/Down)
+    \item No annoying pop-ups
+    \item Spectacle-like window management fully functional
+\end{itemize}
+
+\section*{Optional Tips}
+\begin{itemize}
+    \item Dragging a window to the edge/corner also triggers tiling.
+    \item Multi-monitor layouts are supported in Tiling Assistant settings.
+    \item No need for gTile unless you want complex custom grids.
+\end{itemize}
+
+\end{document}
