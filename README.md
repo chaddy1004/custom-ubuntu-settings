@@ -13,3 +13,6 @@ gotta restart gdm3
 ```
 sudo systemctl restart gdm3
 ```
+
+
+Install [alfred](https://albertlauncher.github.io/)
